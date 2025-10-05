@@ -14,6 +14,7 @@ from decimal import Decimal
 import math, time
 from deap import algorithms as deap_alg
 from deap import base as deap_base, creator, tools as deap_tools, gp
+from fastapi.middleware.cors import CORSMiddleware
 
 
 # Gerekli yeni importlar ve kütüphane kontrolü
@@ -39,12 +40,17 @@ except Exception:
 # App & CORS
 # -----------------------------------------------------------------------------
 app = FastAPI(title="Trading Strategy Studio API", version="1.2.0")
+ALLOWED_ORIGINS = [
+    "https://tradingstudio-c5ke-e7xzzp7qs-gani-yamans-projects.vercel.app",  # burayı kendi domaininle değiştir
+    # geliştirirken geçici olarak "*" da bırakabilirsin
+]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],          # geliştirirken serbest bırak
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
-    allow_methods=["*"],          # özellikle POST/OPTIONS
+    allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["Content-Disposition"],  # dosya adını okuyabilmek için
 )
 
 # === Snapshot memory store ===
