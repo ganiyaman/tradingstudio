@@ -19,7 +19,7 @@ import ResultsPanel from "./features/results/ResultsPanel";
 import OptimizationPanel from "./features/optimization/OptimizationPanel";
 import PortfolioPanel from "./features/portfolio/PortfolioPanel";
 import LivePanel from "./features/live/LivePanel";
-import SetupPanel from "./features/setup/SetupPanel";
+
 
 export default function App() {
   const [tab, setTab] = useState("strategy");
